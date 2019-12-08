@@ -28,6 +28,7 @@ As the program is a simple Bash script, there is no need to install anything. Ho
 * [youtube-dl](https://ytdl-org.github.io/youtube-dl/index.html)
 * [ffmpeg](https://www.ffmpeg.org/)
 * [Rubber Band](https://breakfastquay.com/rubberband/)
+
 Please refer to the webpage of the corresponding packages to install them.
 
 After having installed those dependencies, execute the following commands:
