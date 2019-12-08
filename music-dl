@@ -1,0 +1,42 @@
+#!/bin/bash
+
+clean=1
+pitch=0
+fname="output"
+
+while [ -n "$1" ]; do
+    case "$1" in
+        -c)
+            clean=0
+            ;;
+        -o)
+            fname=$2
+            shift
+            ;;
+        -p)
+            pitch=$2
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *) echo "Option $1 not recognized";;
+    esac
+    shift
+done
+
+youtube-dl -ci -f "bestaudio[ext=m4a]" -o $fname.m4a $1
+
+if [ $pitch != 0 ]
+then
+    fpitched=$fname-p$pitch
+    ffmpeg -i $fname.m4a $fname.wav
+    rubberband -p$pitch $fname.wav $fpitched.wav
+    ffmpeg -i $fpitched.wav $fpitched.m4a
+    if [ $clean ]
+    then
+        rm $fname.m4a $fname.wav $fpitched.wav
+    fi
+fi
+echo Done
